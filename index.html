@@ -7,9 +7,25 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="testDiv">
+
+    </div>
 </body>
 <script>
-    
+    console.log("hotifx 브랜치에서 추가한 내용 ^^");
+
+    const throttle = (callback, delay) => {
+        let timerId;
+        
+        return event => {
+            if(timerId){
+                return false;
+            }
+            setTimeout(() => {
+               callback();
+               timerId = null; 
+            }, delay, event);
+        }
+    }
 </script>
 </html>
