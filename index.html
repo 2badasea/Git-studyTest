@@ -32,6 +32,11 @@
             }, delay, event);
         }
     }
+    
+    const $throttleCount = 0;
+    $btn.addEventListener('click', throttle(()=> {
+        $span.textContent = ++$throttleCount;
+    },1000))
 
     const $devounceCount = 0;
     const devouce = (callback, delay) => {
@@ -44,6 +49,6 @@
     }
     $btn.addEventListener('click', devouce( () => {
         $span.textContent = ++$devounceCount;
-    }))
+    },1000))
 </script>
 </html>
