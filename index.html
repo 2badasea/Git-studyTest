@@ -5,10 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="testDiv">
-        <span></span>
+        <span class="throttleResult"></span>
+        <hr>
+        <span class="devounceResult"></span>
     </div>
     <hr>
     <button class="btn" type="button">click!!</button>
@@ -17,43 +20,64 @@
 
 
     const $btn = document.querySelector('.btn');
-    const $span = document.querySelector('span');
+    const $spanTh = document.querySelector('.throttleResult');
+    const $spanDe = document.querySelector('.devounceResult');
 
+   
     const throttle = (callback, delay) => {
         let timerId;
         
-        return event => {
+        return () => {
             if(timerId){
                 return false;
             }
-            setTimeout(() => {
+            timerId = setTimeout(() => {
                callback();
                timerId = null; 
-            }, delay, event);
+            }, delay);
         }
     }
-    
-    const $throttleCount = 0;
-    $btn.addEventListener('click', throttle(()=> {
-        $span.textContent = ++$throttleCount;
-    },1000))
-
-    const $devounceCount = 0;
-    const devouce = (callback, delay) => {
+    const devounce = (callback, delay) => {
         let timerid;
 
-        if(timerid){
-            clearTimeout(timerid);
+        return () => {
+            if(timerid){
+                clearTimeout(timerid);
+            }
+            timerid = setTimeout(() => {
+                callback();
+                timerid = null;
+            }, delay);
         }
-        timerid = setTimeout(callback(), delay);
     }
-    $btn.addEventListener('click', devouce( () => {
-        $span.textContent = ++$devounceCount;
+
+     let $throttleCount = 0;
+    $btn.addEventListener('click', throttle(()=> {
+        $spanTh.textContent = ++$throttleCount;
     },1000))
 
-    console.log("hotfix에서 추가한 콘솔")
+     let $devounceCount = 0;
+    $btn.addEventListener('click', devounce( () => {
+         $spanDe.textContent = ++$devounceCount;
+    },1000))
 
-    console.log("main에서 추가하다만 코놋");
     
+    // 자바스크립트에서의 reduce 메서드
+    const ary = [1,2,3,4,5,6,7,8,9,10];
+    const sum = ary.reduce( (arr, cnt) => {
+        return arr + cnt;
+    })
+
+    console.log("sum의 값: " + sum);
+</script>
+<script>
+    // Query 코드 연습 부분
+    const ary2 = [1,2,3,4,5,6,7,8,9,10];
+    const sum2 = ary2.reduce(function(acc , cnt){
+        return acc +cnt;
+    },0 );
+
+    console.log("sum2의 값: " + sum2);
+     
 </script>
 </html>
