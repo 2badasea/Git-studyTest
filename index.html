@@ -10,9 +10,13 @@
     <div class="testDiv">
 
     </div>
+    <hr>
+    <button class="btn">click!</button>
 </body>
 <script>
     console.log("hotifx 브랜치에서 추가한 내용 ^^");
+
+    const $btn = document.querySelector('.btn');
 
     const throttle = (callback, delay) => {
         let timerId;
