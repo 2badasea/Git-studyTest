@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="testDiv">
-
+        <span></span>
     </div>
     <hr>
     <button class="btn" type="button">click!!</button>
@@ -17,6 +17,7 @@
 
 
     const $btn = document.querySelector('.btn');
+    const $span = document.querySelector('span');
 
     const throttle = (callback, delay) => {
         let timerId;
@@ -31,5 +32,18 @@
             }, delay, event);
         }
     }
+
+    const $devounceCount = 0;
+    const devouce = (callback, delay) => {
+        let timerid;
+
+        if(timerid){
+            clearTimeout(timerid);
+        }
+        timerid = setTimeout(callback(), delay);
+    }
+    $btn.addEventListener('click', devouce( () => {
+        $span.textContent = ++$devounceCount;
+    }))
 </script>
 </html>
